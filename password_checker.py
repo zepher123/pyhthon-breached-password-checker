@@ -12,8 +12,10 @@ def request_api_data(querry_char):
 
 def pwned_api_check(password):
     #check password if it exist in api response
-    print(hashlib.sha1(password.encode('utf-8')).hexdigest().upper())
+    sha1password = (hashlib.sha1(password.encode('utf-8')).hexdigest().upper())
+    #print(hashlib.sha1(password.hexdigest() # if not encoded it gives error to first convert
     # shah1password = hashlib.sha1(password.encode('utf-8'))
+    return sha1password
 
 
 pwned_api_check('123')
