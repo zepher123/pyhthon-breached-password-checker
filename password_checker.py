@@ -1,6 +1,6 @@
 import requests
 import hashlib  # sha1 hashing with this library
-
+import sys
 
 def request_api_data(querry_char):
     url = 'https://api.pwnedpasswords.com/range/' + querry_char  # kate anomity
@@ -24,7 +24,19 @@ def pwned_api_check(password):
 def getpasswordleakcount(hashes, hash_to_check):
     hashes = (line.split(':') for line in hashes.text.splitlines())
     for h, count in hashes:
-        print (h, count)
+        if h== hash_to_check:
+            return count
+    return 0
 
 
-pwned_api_check('123')
+
+def main(args):
+    for password in args:
+        count = pwned_api_check(password)
+        if count:
+            print(f'{password} was found {count} times.... you should probably change password')
+        else:
+            print(f'{password} was not found. Carry on')
+    return 'done'
+
+main(sys.argv[1: ])
