@@ -17,12 +17,14 @@ def pwned_api_check(password):
     # shah1password = hashlib.sha1(password.encode('utf-8'))
     first5char, tailchar = sha1password[:5], sha1password[5:]
     response = request_api_data(first5char)
-    print(response)
-    return readresponse(response)
+    #print(response)
+    return getpasswordleakcount(response, tailchar)
 
 
-def readresponse(response):
-    print(response.text)
+def getpasswordleakcount(hashes, hash_to_check):
+    hashes = (line.split(':') for line in hashes.text.splitlines())
+    for h, count in hashes:
+        print (h, count)
 
 
 pwned_api_check('123')
