@@ -40,4 +40,4 @@ def main(args):
     return 'done'
 
 if __name__ == '__main__':
-    main(sys.argv[1: ])
+    sys.exit(main(sys.argv[1: ])) #to exit process and brings to cmd line incase if it doesn't exit
